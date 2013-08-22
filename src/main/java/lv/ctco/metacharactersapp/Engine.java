@@ -1,18 +1,9 @@
 package lv.ctco.metacharactersapp;
 
-/**
- * Created with IntelliJ IDEA.
- * User: fedkin
- * Date: 8/22/13
- * Time: 12:43 PM
- * To change this template use File | Settings | File Templates.
- */
-public class MetacharactersAppEngine {
+public class Engine {
 
     public String stripBackslashNewlineSomeCombinations(String inputLine) {
         if (isEmpty(inputLine)) return inputLine;
-        if (isNotContainsFromBackslashNewlines(inputLine)) return inputLine;
-        if (isOnlyOneBackslashOrNewLine(inputLine)) return inputLine;
 
         int tempRemovalSubstringCharCounter = 0;
         int indexForResultCharArray = 0;
@@ -56,25 +47,6 @@ public class MetacharactersAppEngine {
     }
 
     public boolean isEmpty(String s) {
-        if (s == null || s.isEmpty()) return true;
-        return false;
-    }
-
-    public boolean isNotContainsFromBackslashNewlines(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '\\' || s.charAt(i) == '\n') return false;
-        }
-        return true;
-    }
-
-    public boolean isOnlyOneBackslashOrNewLine(String s) {
-        int counter = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '\\' || s.charAt(i) == '\n') {
-                counter++;
-            }
-        }
-        if (counter == 1) return true;
-        return false;
+        return s == null || s.isEmpty();
     }
 }
