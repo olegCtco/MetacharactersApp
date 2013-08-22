@@ -171,21 +171,54 @@ public class MetacharactersAppEngineTest {
         assertFalse(result);
     }
 
-//    @Test
-//    public void shouldTrueBecauseWrongOrder_isWrongOrder(){
-//        String inputLine = "abc\n\\def";
-//
-//        MetacharactersAppEngine metacharactersAppEngine = new MetacharactersAppEngine();
-//        boolean result = metacharactersAppEngine.isWrongOrder(inputLine);
-//        assertTrue(result);
-//    }
-//
-//    @Test
-//    public void shouldFalseBecauseCorrectOrder_isWrongOrder(){
-//        String inputLine = "abc\\\ndef";
-//
-//        MetacharactersAppEngine metacharactersAppEngine = new MetacharactersAppEngine();
-//        boolean result = metacharactersAppEngine.isWrongOrder(inputLine);
-//        assertFalse(result);
-//    }
+
+    @Test
+    public void testOneStripped() {
+        String inputLine = "\\\n";
+        String expectedLine = "";
+
+        MetacharactersAppEngine metacharactersAppEngine = new MetacharactersAppEngine();
+        String resultLine = metacharactersAppEngine.stripBackslashNewlineSomeCombinations(inputLine);
+        assertEquals(expectedLine, resultLine);
+    }
+
+    @Test
+    public void testOneNewline() {
+        String inputLine = "\n";
+        String expectedLine = "\n";
+
+        MetacharactersAppEngine metacharactersAppEngine = new MetacharactersAppEngine();
+        String resultLine = metacharactersAppEngine.stripBackslashNewlineSomeCombinations(inputLine);
+        assertEquals(expectedLine, resultLine);
+    }
+
+    @Test
+    public void testOneBackslash() {
+        String inputLine = "\\";
+        String expectedLine = "\\";
+
+        MetacharactersAppEngine metacharactersAppEngine = new MetacharactersAppEngine();
+        String resultLine = metacharactersAppEngine.stripBackslashNewlineSomeCombinations(inputLine);
+        assertEquals(expectedLine, resultLine);
+    }
+
+    @Test
+    public void testOneNewlineBackslash() {
+        String inputLine = "\n\\";
+        String expectedLine = "\n\\";
+
+        MetacharactersAppEngine metacharactersAppEngine = new MetacharactersAppEngine();
+        String resultLine = metacharactersAppEngine.stripBackslashNewlineSomeCombinations(inputLine);
+        assertEquals(expectedLine, resultLine);
+    }
+
+    @Test
+    public void testTwoBackslashesNewLine() {
+        String inputLine = "\\\\\n";
+        String expectedLine = "";
+
+        MetacharactersAppEngine metacharactersAppEngine = new MetacharactersAppEngine();
+        String resultLine = metacharactersAppEngine.stripBackslashNewlineSomeCombinations(inputLine);
+        assertEquals(expectedLine, resultLine);
+    }
 }

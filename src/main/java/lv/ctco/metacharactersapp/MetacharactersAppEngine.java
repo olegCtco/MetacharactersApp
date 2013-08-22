@@ -13,7 +13,6 @@ public class MetacharactersAppEngine {
         if (isEmpty(s)) return s;
         if (isNotContainsFromBackslashNewlines(s)) return s;
         if (isOnlyOneBackslashOrNewLine(s)) return s;
-//        if (isWrongOrder(s)) return s;
 
         int counter = 0;
         char[] chars = s.toCharArray();
@@ -52,6 +51,9 @@ public class MetacharactersAppEngine {
 
         String beforeReverse = new String(result).trim();
         String reverse = new StringBuffer(beforeReverse).reverse().toString();
+        if (s.charAt(0) == '\n') {
+            reverse = '\n' + reverse;
+        }
         return reverse;
     }
 
@@ -77,22 +79,4 @@ public class MetacharactersAppEngine {
         if (counter == 1) return true;
         return false;
     }
-
-//    public boolean isWrongOrder(String s) {
-//        boolean flag = true;
-//        for (int i = 0; i < s.length(); i++) {
-//            if (flag) {
-//                if (s.charAt(i) == '\n') {
-//                    flag = false;
-//                }
-//            } else if (!flag) {
-//                if (s.charAt(i) == '\\') {
-//                    return true;
-//                } else {
-//                    flag = true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
 }
