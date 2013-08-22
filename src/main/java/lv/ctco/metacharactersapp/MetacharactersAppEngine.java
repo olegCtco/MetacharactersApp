@@ -9,52 +9,50 @@ package lv.ctco.metacharactersapp;
  */
 public class MetacharactersAppEngine {
 
-    public String stripBackslashNewlineSomeCombinations(String s) {
-        if (isEmpty(s)) return s;
-        if (isNotContainsFromBackslashNewlines(s)) return s;
-        if (isOnlyOneBackslashOrNewLine(s)) return s;
+    public String stripBackslashNewlineSomeCombinations(String inputLine) {
+        if (isEmpty(inputLine)) return inputLine;
+        if (isNotContainsFromBackslashNewlines(inputLine)) return inputLine;
+        if (isOnlyOneBackslashOrNewLine(inputLine)) return inputLine;
 
-        int counter = 0;
-        char[] chars = s.toCharArray();
-        char[] result = new char[s.length()];
-        for (int i = chars.length - 1, y = 0; i >= 0; i--) {
-            if (counter == 0) {
-                if (chars[i] != '\n') {
-                    result[y] = chars[i];
-                    y++;
-                } else if (i == 0) {
-                    result[y] = chars[i];
-                    y++;
+        int tempRemovalSubstringCharCounter = 0;
+        int indexForResultCharArray = 0;
+        char[] inputLineCharArray = inputLine.toCharArray();
+        char[] resultReversedCharArray = new char[inputLine.length()];
+        for (int indexForInputLineCharArray = inputLineCharArray.length - 1; indexForInputLineCharArray >= 0; indexForInputLineCharArray--) {
+            if (tempRemovalSubstringCharCounter == 0) {
+                if (inputLineCharArray[indexForInputLineCharArray] != '\n') {
+                    resultReversedCharArray[indexForResultCharArray] = inputLineCharArray[indexForInputLineCharArray];
+                    indexForResultCharArray++;
                 } else {
-                    counter++;
+                    tempRemovalSubstringCharCounter++;
                 }
-            } else if (counter == 1) {
-                if (chars[i] == '\\') {
-                    counter++;
+            } else if (tempRemovalSubstringCharCounter == 1) {
+                if (inputLineCharArray[indexForInputLineCharArray] == '\\') {
+                    tempRemovalSubstringCharCounter++;
                 } else {
-                    result[y] = '\n';
-                    y++;
-                    result[y] = chars[i];
-                    y++;
-                    counter = 0;
+                    resultReversedCharArray[indexForResultCharArray] = '\n';
+                    indexForResultCharArray++;
+                    resultReversedCharArray[indexForResultCharArray] = inputLineCharArray[indexForInputLineCharArray];
+                    indexForResultCharArray++;
+                    tempRemovalSubstringCharCounter = 0;
                 }
             } else {
-                if (chars[i] == '\\') {
-                    counter++;
+                if (inputLineCharArray[indexForInputLineCharArray] == '\\') {
+                    tempRemovalSubstringCharCounter++;
                 } else {
-                    result[y] = chars[i];
-                    y++;
-                    counter = 0;
+                    resultReversedCharArray[indexForResultCharArray] = inputLineCharArray[indexForInputLineCharArray];
+                    indexForResultCharArray++;
+                    tempRemovalSubstringCharCounter = 0;
                 }
             }
         }
 
-        String beforeReverse = new String(result).trim();
-        String reverse = new StringBuffer(beforeReverse).reverse().toString();
-        if (s.charAt(0) == '\n') {
-            reverse = '\n' + reverse;
+        String beforeReverseTrimmedLine = new String(resultReversedCharArray).trim();
+        String reversedLine = new StringBuffer(beforeReverseTrimmedLine).reverse().toString();
+        if (inputLine.charAt(0) == '\n') {
+            reversedLine = '\n' + reversedLine;
         }
-        return reverse;
+        return reversedLine;
     }
 
     public boolean isEmpty(String s) {
