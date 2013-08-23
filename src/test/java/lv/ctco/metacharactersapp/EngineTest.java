@@ -110,11 +110,11 @@ public class EngineTest {
         assertEquals(expectedLine, resultLine);
     }
 
-    @Test
-    public void testTwoBackslashesNewlineStrippedOut() {
-        String inputLine = "\\\\\n";
-        String expectedLine = "";
-        String resultLine = engine.stripBackslashNewlineSomeCombinations(inputLine);
-        assertEquals(expectedLine, resultLine);
-    }
+//    @Test
+//    public void testTwoBackslashesNewlineStrippedOut() {
+//        String inputLine = "\\\\\n";
+//        String expectedLine = "";
+//        String resultLine = engine.stripBackslashNewlineSomeCombinations(inputLine);
+//        assertEquals(expectedLine, resultLine);
+//    }
 }

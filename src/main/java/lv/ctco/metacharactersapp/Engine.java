@@ -1,49 +1,20 @@
 package lv.ctco.metacharactersapp;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Engine {
 
     public String stripBackslashNewlineSomeCombinations(String inputLine) {
+        String regex = "\\\\\n";
         if (isEmpty(inputLine)) return inputLine;
 
-        int tempRemovalSubstringCharCounter = 0;
-        int indexForResultCharArray = 0;
-        char[] inputLineCharArray = inputLine.toCharArray();
-        char[] resultReversedCharArray = new char[inputLine.length()];
-        for (int indexForInputLineCharArray = inputLineCharArray.length - 1; indexForInputLineCharArray >= 0; indexForInputLineCharArray--) {
-            if (tempRemovalSubstringCharCounter == 0) {
-                if (inputLineCharArray[indexForInputLineCharArray] != '\n') {
-                    resultReversedCharArray[indexForResultCharArray] = inputLineCharArray[indexForInputLineCharArray];
-                    indexForResultCharArray++;
-                } else {
-                    tempRemovalSubstringCharCounter++;
-                }
-            } else if (tempRemovalSubstringCharCounter == 1) {
-                if (inputLineCharArray[indexForInputLineCharArray] == '\\') {
-                    tempRemovalSubstringCharCounter++;
-                } else {
-                    resultReversedCharArray[indexForResultCharArray] = '\n';
-                    indexForResultCharArray++;
-                    resultReversedCharArray[indexForResultCharArray] = inputLineCharArray[indexForInputLineCharArray];
-                    indexForResultCharArray++;
-                    tempRemovalSubstringCharCounter = 0;
-                }
-            } else {
-                if (inputLineCharArray[indexForInputLineCharArray] == '\\') {
-                    tempRemovalSubstringCharCounter++;
-                } else {
-                    resultReversedCharArray[indexForResultCharArray] = inputLineCharArray[indexForInputLineCharArray];
-                    indexForResultCharArray++;
-                    tempRemovalSubstringCharCounter = 0;
-                }
-            }
+        List<String> stringList = Arrays.asList(inputLine.split(regex));
+        String result = "";
+        for (String s : stringList) {
+            result += s;
         }
-
-        String beforeReverseTrimmedLine = new String(resultReversedCharArray).trim();
-        String reversedLine = new StringBuffer(beforeReverseTrimmedLine).reverse().toString();
-        if (inputLine.charAt(0) == '\n') {
-            reversedLine = '\n' + reversedLine;
-        }
-        return reversedLine;
+        return result;
     }
 
     public boolean isEmpty(String s) {
