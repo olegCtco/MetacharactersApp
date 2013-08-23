@@ -90,9 +90,9 @@ public class EngineTest {
     }
 
     @Test
-    public void testTwoBackslashesNewlineStrippedOut() {
-        String inputLine = "\\\\\n";
-        String expectedLine = "";
+    public void testMaxRandom() {
+        String inputLine = "a\\\\\\\\\\\\\\\\b\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nc";
+        String expectedLine = "a\\\\\\\\\\\\\\\\bc";
         String resultLine = engine.stripBackslashNewlineSomeCombinations(inputLine);
         assertEquals(expectedLine, resultLine);
     }
