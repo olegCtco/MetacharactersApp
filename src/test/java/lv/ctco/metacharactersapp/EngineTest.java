@@ -3,6 +3,7 @@ package lv.ctco.metacharactersapp;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 
+import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 
 public class EngineTest {
@@ -95,5 +96,20 @@ public class EngineTest {
         String expectedLine = "a\\\\\\\\\\\\\\\\bc";
         String resultLine = engine.stripBackslashNewlineSomeCombinations(inputLine);
         assertEquals(expectedLine, resultLine);
+    }
+
+    @Test
+    public void testNullInputString() {
+        String inputLine = null;
+        String resultLine = engine.stripBackslashNewlineSomeCombinations(inputLine);
+        assertNull(resultLine);
+    }
+
+    @Test
+    public void testEmptyInputString() {
+        String inputLine = "";
+        String expected = "";
+        String resultLine = engine.stripBackslashNewlineSomeCombinations(inputLine);
+        assertEquals(expected, resultLine);
     }
 }
